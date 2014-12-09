@@ -1,0 +1,21 @@
+{
+  "name": "countdown",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mlt-meetup/countdown",
+  "authors": [
+    "monpy <4696monpy@gmail.com>"
+  ],
+  "description": "for LT speaker timer",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "git://github.com/component/emitter": "*"
+  }
+}

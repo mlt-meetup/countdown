@@ -1,0 +1,96 @@
+//--- write functions & vars
+
+
+//--- functions
+bg-size-half(image)
+  background-image: url(image)
+  background-size: (image-size(image)[0] / 2) (image-size(image)[1] / 2)
+  background-repeat no-repeat
+  background-position: 0 0
+
+bg-size-center(image)
+  background-image: url(image)
+  background-position: center center
+  background-size: (image-size(image)[0]) (image-size(image)[1])
+  background-repeat no-repeat
+
+bg-size-half-center(image)
+  background-image: url(image)
+  background-position: center center
+  background-size: (image-size(image)[0] / 2) (image-size(image)[1] / 2)
+  background-repeat no-repeat
+
+bg-size-cover(image)
+  background-image: url(image)
+  background-size: cover;
+  
+create(image)
+  background-image: url(image)
+  background-size: (image-size(image)[0]) (image-size(image)[1])
+  background-repeat no-repeat
+  background-position: 0 0
+  width (image-size(image)[0])
+  height (image-size(image)[1])
+  
+create-half(image)
+  background-image: url(image)
+  background-size: (image-size(image)[0] / 2) (image-size(image)[1] / 2)
+  background-repeat no-repeat
+  background-position: 0 0
+  width (image-size(image)[0] / 2)
+  height (image-size(image)[1] / 2)
+  
+create-half-center(image)
+  background-image: url(image)
+  background-size: (image-size(image)[0] / 2) (image-size(image)[1] / 2)
+  background-repeat no-repeat
+  background-position: 0 0
+  position absolute
+  top 50%
+  left 50% 
+  margin-left (image-size(image)[0] / -4)
+  margin-top (image-size(image)[1] / -4)
+  width (image-size(image)[0] / 2)
+  height (image-size(image)[1] / 2)
+
+border-radius()
+  -webkit-border-radius arguments
+  -moz-border-radius arguments
+  border-radius arguments
+  
+box-shadow()
+   -webkit-box-shadow arguments
+   -moz-box-shadow arguments
+   box-shadow arguments
+
+bg-size(w, h)
+  -webkit-background-size w h
+  background-size w h
+  
+bg-image(url, w, h)
+  background-image url(url)
+  background-repeat no-repeat
+  bg-size w h
+  
+bg-image-fit(url, w, h)
+  bg-image url w h
+  width w
+  height h
+  
+fit-to-background(w, h)
+  width w
+  height h
+  bg-size w h
+  background-repeat no-repeat
+
+fontsize(size = 10)
+  font-size: unit(size, px)
+  font-size: unit(size/10,rem)
+
+lineheight(height = 10)
+  calc = height/10
+  line-height: calc
+
+fset(font_size,line_height)
+  fontsize(font_size)
+  lineheight(line_height)
