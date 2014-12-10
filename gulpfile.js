@@ -29,6 +29,7 @@ gulp.task('js', function () {
       extensions: ['.js']
     })
     .bundle()
+    .on('error', console.log.bind(console, 'error'))
     .pipe(source('app.js'))
     .pipe(gulp.dest('./public/js/'))
 });
@@ -62,4 +63,3 @@ gulp.task('default', ['browser-sync','html','css','js','copy_font','copy_img'], 
     gulp.watch("public/*.js", ['bs-reload']);
     gulp.watch("src/images/*", ['copy_img','bs-reload']);
 });
-
