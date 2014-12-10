@@ -6,14 +6,11 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var nib = require('nib');
 
-console.log(assemble);
-console.log(assemble.helpers)
-
 // Start the server
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-        baseDir: "./publish"
+        baseDir: "./public"
     }
   });
 });
@@ -22,7 +19,7 @@ gulp.task('browser-sync', function() {
 gulp.task('css', function () {
   gulp.src('./src/css/style.styl')
     .pipe(stylus({use: [nib()]}))
-    .pipe(gulp.dest('./publish/css/'))
+    .pipe(gulp.dest('./public/css/'))
     .pipe(browserSync.reload({stream:true}));
 });
 
@@ -33,7 +30,7 @@ gulp.task('js', function () {
     })
     .bundle()
     .pipe(source('app.js'))
-    .pipe(gulp.dest('./publish/js/'))
+    .pipe(gulp.dest('./public/js/'))
 });
 
 // Reload all Browsers
@@ -45,19 +42,18 @@ gulp.task('assemble', function () {
   gulp.src('src/*.hbs')
     .pipe(assemble({
       partials: ['src/_partials/**/*.hbs']
-      
     }))
-    .pipe(gulp.dest('./publish'))
+    .pipe(gulp.dest('./public'))
 });
 
 gulp.task('copy_font', function(){
   gulp.src('src/font/*')
-    .pipe(gulp.dest('./publish/font'));
+    .pipe(gulp.dest('./public/font'));
 });
 
 gulp.task('copy_img', function(){
   gulp.src('src/images/*')
-    .pipe(gulp.dest('./publish/images'));
+    .pipe(gulp.dest('./public/images'));
 });
 
 // Watch scss AND html files, doing different things with each.
@@ -65,8 +61,8 @@ gulp.task('default', ['browser-sync','assemble','css','js','copy_font','copy_img
     gulp.watch("src/css/**/*.styl", ['css']);
     gulp.watch("src/js/**/*.js", ['js']);
     gulp.watch("src/**/*.hbs", ['assemble']);
-    gulp.watch("publish/*.html", ['bs-reload']);
-    gulp.watch("publish/*.js", ['bs-reload']);
+    gulp.watch("public/*.html", ['bs-reload']);
+    gulp.watch("public/*.js", ['bs-reload']);
     gulp.watch("src/images/*", ['copy_img','bs-reload']);
 });
 
