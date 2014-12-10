@@ -12,6 +12,4 @@ SocketMng.prototype.setSocketEvents = function(){
   });
 }
 
-
-
 module.exports = SocketMng;

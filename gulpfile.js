@@ -38,11 +38,8 @@ gulp.task('bs-reload', function () {
     browserSync.reload();
 });
 
-gulp.task('assemble', function () {
-  gulp.src('src/*.hbs')
-    .pipe(assemble({
-      partials: ['src/_partials/**/*.hbs']
-    }))
+gulp.task('html', function () {
+  gulp.src('src/index.html')
     .pipe(gulp.dest('./public'))
 });
 
@@ -57,10 +54,10 @@ gulp.task('copy_img', function(){
 });
 
 // Watch scss AND html files, doing different things with each.
-gulp.task('default', ['browser-sync','assemble','css','js','copy_font','copy_img'], function () {
+gulp.task('default', ['browser-sync','html','css','js','copy_font','copy_img'], function () {
     gulp.watch("src/css/**/*.styl", ['css']);
     gulp.watch("src/js/**/*.js", ['js']);
-    gulp.watch("src/**/*.hbs", ['assemble']);
+    gulp.watch("src/**/*.html", ['html']);
     gulp.watch("public/*.html", ['bs-reload']);
     gulp.watch("public/*.js", ['bs-reload']);
     gulp.watch("src/images/*", ['copy_img','bs-reload']);
