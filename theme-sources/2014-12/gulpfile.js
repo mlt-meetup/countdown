@@ -9,7 +9,8 @@ var nib = require('nib');
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-        baseDir: "../../public/2014-12"
+        baseDir: "../../public/2014-12",
+        port: 3001
     }
   });
 });

@@ -1,14 +1,14 @@
-var Socket_client = require('socket.io-client');
+var SocketClient = require('socket.io-client');
 
 function SocketMng(emitter){
   this.emitter = emitter;
-  this.socket_client = new Socket_client();
+  this.socketClient = new SocketClient();
 }
 
 SocketMng.prototype.setSocketEvents = function(){
   // emit on sockets
-  this.socket_client.on('',function(){
-
+  this.socketClient.on('tweet',function(data){
+    console.log(data);
   });
 }
 
