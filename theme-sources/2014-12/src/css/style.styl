@@ -1,3 +1,5 @@
+@import "nib";
+
 @import "libs/utils";
 @import "libs/fontface";
 @import "libs/normalize";
@@ -23,6 +25,22 @@ body,html
     top: 0;
     img
       width: 100px
+    animation: jumping 1s linear infinite
+    &.type0
+      animation-delay: 0.4s
+      animation-duration: 2s
+    &.type1
+      animation-delay: 0.2s
+      animation-duration: 1.2s
+    &.type2
+      animation-delay: 0.6s
+      animation-duration: 1.4s
+    &.type3
+      animation-delay: 0.4s
+      animation-duration: 1.2s
+    &.type4
+      animation-delay: 1.2s
+      animation-duration: 1.8s
 
   for num in 0..20
     .pos_{num}
@@ -137,3 +155,14 @@ body,html
   left: -52%
 #close_right
   right: -52%
+
+@keyframes jumping
+  0%
+    transform: translate(0,0)
+  50%
+    transform: translate(0,0)
+  52%
+    transform: translate(0,-20px)
+  54%
+    transform: translate(0,0)
+

@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var fullPitchString = require('../utils/StringToFullPitch');
+var getRandomInt = require('../utils/getRandomInt');
 
 function View(emitter){
   this.emitter = emitter;
@@ -12,7 +13,8 @@ function View(emitter){
 
 View.prototype.insertAudience = function(){
   for (var i = 0; i <= 20; i++) {
-    var $dom = this.$('<div class="audience pos_'+i+'"><img src="images/man.png" alt=""></div>');
+    var type = "type" + getRandomInt(0,4); 
+    var $dom = this.$('<div class="audience pos_'+i+' '+ type +'"><img src="images/man.png" alt=""></div>');
     this.$('.audience_wrap').append($dom);
   }
 };
