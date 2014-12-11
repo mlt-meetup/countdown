@@ -21,6 +21,13 @@ View.prototype.insertAudience = function(){
 
 View.prototype.setEmitterEvents = function(){
   //recieve event from socketMng
+  this.emitter.on('set', this.set.bind(this));
+  this.emitter.on('reset', this.reset.bind(this));
+  this.emitter.on('start', this.start.bind(this));
+  this.emitter.on('pause', this.pause.bind(this));
+  this.emitter.on('update', this.update.bind(this));
+  this.emitter.on('track', this.track.bind(this));
+  this.emitter.on('tweet', this.tweet.bind(this));
 };
 
 View.prototype.update = function(speakerName, speakerTitle){
