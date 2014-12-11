@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  h1 Admin
+
+  h2 Reset
+  form(method='post', name='reset', action='/admin/reset')
+    input(type='submit', value='reset')
+
+  h2 Set
+  form(method='post', name='set', action='/admin/set')
+    input(type='number', name='sec', placeholder='300')
+    input(type='submit', value='set')
+
+  h2 Start
+  form(method='post', name='start', action='/admin/start')
+    input(type='submit', value='start')
+
+  h2 Pause
+  form(method='post', name='pause', action='/admin/pause')
+    input(type='submit', value='pause')
+
+  h2 Update
+  form(method='post', name='update', action='/admin/update')
+    input(type='text', name='name', placeholder='name')
+    input(type='text', name='title', placeholder='title')
+    input(type='submit', value='update')
+
+  h2 Track
+  form(method='post', name='track', action='/admin/track')
+    input(type='text', name='query', placeholder='query')
+    input(type='submit', value='track')
+
+  script(src='/admin/app.js')

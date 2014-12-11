@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+/**
+ * Load env.
+ */
+
+var env = require('dotenv').load();
+
+/**
+ * Module dependencies.
+ */
+
+var debug = require('debug')('countdown');
+var fwd = require('forward-events');
+var app = require('../app');
+var socket = require('../lib/socket');
+var server = require('http').createServer(app);
+var stream = require('node-tweet-stream')({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  token: process.env.TWITTER_TOKEN,
+  token_secret: process.env.TWITTER_TOKEN_SECRET
+});
+
+app.set('port', process.env.PORT || 3000);
+
+app.on('track', function(query) {
+  stream.track(query);
+});
+
+stream.on('error', console.log.bind(console, 'tweet stream error'));
+
+fwd(app, socket);
+fwd(stream, socket);
+socket.attach(server);
+
+server.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
