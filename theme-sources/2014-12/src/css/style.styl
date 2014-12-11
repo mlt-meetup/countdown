@@ -12,6 +12,7 @@ body,html
   height 100%
   overflow hidden
   position: relative
+  font-family: "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, Meiryo, sans-serif;
 
 
 .audience_wrap
@@ -57,6 +58,7 @@ body,html
   text-align: center
   fset(32,12)
   font-family: 'kanyutei'
+  box-shadow: 0 0 10px 10px rgba(0,0,0,0.6);
 
 
 #speaker_body
@@ -67,6 +69,7 @@ body,html
   img
     display: block
     position: relative
+    animation panda 12s linear infinite
   .zabuton
     content url('../images/zabuton.png');
     position: absolute
@@ -127,7 +130,7 @@ body,html
   .lt_speaker__foot
     position: absolute
     width: 10px
-    height: 140%
+    height: 300%
     left: 50%
     top: -2%
     margin: -5px
@@ -166,6 +169,16 @@ body,html
     transform: translate(0,-20px)
   54%
     transform: translate(0,0)
+
+.syuryo
+  position: absolute
+  left: 50%
+  top: 50%
+  margin-left: -215px
+  margin-top: -143px
+  transition all 1s ease-out
+  &.hidden
+    top: -287px
 
 .msg
   padding: 20px
@@ -216,6 +229,29 @@ body,html
       width: 48px
       height: 48px
 
+.panda_comment
+  position: absolute
+  right: 50%
+  bottom: 54%
+  max-width: 200px
+  background: rgba(57,97,34,0.92)
+  box-shadow: rgba(0,0,0,0.2) 0 0 20px 2px
+  fset(18,16)
+  word-break: break-all
+  padding: 20px
+  border-radius 10px
+  margin-right: 60px
+  color: #fff;
+  &.arrival
+    -webkit-animation: arrival .3s linear;
+  &:before
+    content: ""
+    position: absolute
+    bottom: -24px
+    right: 8%
+    border: 12px solid transparent
+    border-top: 12px solid rgba(57,97,34,0.92)
+    
 .arrival
   -webkit-animation: arrival .3s linear;
 
@@ -224,7 +260,16 @@ body,html
 
 .depart
   -webkit-animation: depart .3s linear; 
-      
+
+.panda_arrival
+  -webkit-animation: panda_arrival .3s linear;
+
+.panda_state
+  -webkit-animation: panda_state 4s linear; 
+
+.panda_depart
+  -webkit-animation: panda_depart .3s linear; 
+
 
 @keyframes depart
   0% 
@@ -256,5 +301,78 @@ body,html
   100%
     opacity: 1;
     -webkit-transform: translate(0,0);
+
+@keyframes panda_depart
+  0% 
+    opacity: 1;
+    transform: scale(1);
+  100%
+    opacity: 0;
+    transform: scale(0);
   
 
+
+@keyframes panda_state
+  0% 
+    opacity: 1;
+    transform: scale(1);
+  100%
+    opacity: 1;
+    transform: scale(1);
+  
+
+
+@keyframes panda_arrival
+  0% 
+    opacity: 0;
+    -webkit-transform: scale(0);
+  100%
+    opacity: 1;
+    -webkit-transform: scale(1);
+  
+@keyframes panda
+  0%
+    transform rotate(0deg)
+  47%
+    transform rotate(0deg)
+  50%  
+    transform rotate(-10deg)
+  53%
+    transform rotate(0deg)
+  56%
+    transform rotate(10deg)
+  59%
+    transform rotate(0deg)
+  100%
+    transform rotate(0deg)
+
+.LT
+  position: absolute
+  text-align: center
+  width: 100%
+  height: 200px
+  top:50%
+  margin-top: -100px
+  fset(400,100)
+  transform skewX(-10deg)
+  color #fff
+  font-family 'futura'
+  line-height:100px;
+  color: #f0f0f0
+  .L
+    margin-right: 150px
+    text-shadow: 0 0 100px rgba(255,0,0,1)
+    animation txanimate 2s linear infinite
+  .T
+    text-shadow: 0 0 100px rgba(0,255,0,1)
+    animation txanimate 2s linear 1s infinite
+
+@keyframes txanimate
+  0%
+    text-shadow: 0 0 100px rgba(255,0,0,1)
+  49.9%
+    text-shadow: 0 0 100px rgba(255,0,0,1)
+  50%
+    text-shadow: 0 0 100px rgba(0,255,0,1)
+  100%
+    text-shadow: 0 0 100px rgba(0,255,0,1)

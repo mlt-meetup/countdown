@@ -1,24 +1,24 @@
 var $ = require('jquery');
 var fullPitchString = require('../utils/StringToFullPitch');
 var getRandomInt = require('../utils/getRandomInt');
-
+var Countdown = require('../utils/countdown');
 function View(emitter){
   this.emitter = emitter;
   this.$ = $;
 
   //animation dom
   this.$msgBase = $('<div class="msg"></div>').on('animationend webkitAnimationEnd', this.msgAnimSeq.bind(this));
+  this.$pandaBase = $('<div class="panda_comment"></div>').on('animationend webkitAnimationEnd', this.pandaAnimSeq.bind(this));
+
 
   //this query
   this.query = "";
 
   //sec
-  this.speakTime = 600;
+  this.speakTime = 10;
 
-  this.base_postions = [
-    
-
-  ];
+  //count down
+  this.countdown = null;
 
   //msg base width == 200
   this.msgHorizonalNum = Math.round(this.$(window).width() / 200);
@@ -33,6 +33,9 @@ function View(emitter){
   this.emitter.on('tweet', this.tweet.bind(this));
 
   this.$(window).on('resize', this.onResizeView.bind(this) );
+
+  //pandacomment loop
+  setInterval(this.addPandaComment.bind(this), 8000);
 
 };
 
@@ -68,6 +71,17 @@ View.prototype.update = function(speakerName, speakerTitle){
 View.prototype.reset = function(){
   console.log('reset function');
   this.update('提供 いいオフィスさん', '月刊LT12月号の巻');
+  
+  //syuryo
+  this.$('.syuryo').addClass('hidden');
+
+  //maku
+  var basePos = 52;
+  this.$('#close_left').css({left: -basePos+'%'});
+  this.$('#close_right').css({right: -basePos+'%'});
+
+  //count down stop
+  this.pause();
 };
 
 View.prototype.set = function(sec){
@@ -75,24 +89,43 @@ View.prototype.set = function(sec){
   this.speakTime = sec;
 };
 
-View.prototype.start = function(sec){
-  console.log('start!!!');
-  this.speakTime = sec;
-
+View.prototype.start = function(){
+  console.log('start!!!',this.speakTime);
   // first position = 52%
-  var basePos = 0;
+  var basePos = 52;
   this.$('#close_left').css({left: -basePos+'%'});
   this.$('#close_right').css({right: -basePos+'%'});
+
+  this.$('.syuryo').addClass('hidden');
+
+  if (this.countdown != null) {
+    this.countdown.pause();
+    this.countdown = null;
+  }else{
+
+  }
+
+  //new countdown
+  this.countdown = new Countdown(this.speakTime);
+  this.countdown.on('tick', this.tick.bind(this));
+  this.countdown.on('finish', this.finish.bind(this));
+  this.countdown.start();
 };
 
+View.prototype.finish = function(){
+  this.countdown.pause();
+  this.$('.syuryo').removeClass('hidden');
+}
+
 View.prototype.tick = function(until){
-  var per = this.speakTime / until;
+  var per =  (until / this.speakTime) * 52;
+  console.log(per);
   this.$('#close_left').css({left:-per + '%'});
   this.$('#close_right').css({right:-per + '%'});
 };
 
 View.prototype.tweet = function(tweet){
-  console.log(tweet);
+  // console.log(tweet);
   var msg = this.$msgBase.clone(true,true);
   var text = tweet.text;
   // todo ある程度は.. に置き換え
@@ -141,12 +174,15 @@ View.prototype.tweet = function(tweet){
 
 View.prototype.track = function(query){
   //検索キーワードが設定,,,
-  console.log(query);
   this.query = query;
 };
 
 View.prototype.pause = function(){
-
+  console.log('pause!!!!!!!!!!');
+  if (this.countdown != null) {
+    this.countdown.pause();
+    this.countdown = null;
+  };
 };
 
 View.prototype.msgAnimSeq = function(e){
@@ -164,5 +200,64 @@ View.prototype.msgAnimSeq = function(e){
   }
 };
 
+
+View.prototype.addPandaComment = function(e){
+  console.log('add panda comment');
+  var msg = this.$pandaBase.clone(true,true);
+
+  var text = this.getPandaText();
+  msg.text(text);
+
+  msg.addClass('panda_arrival');
+  this.$('#speaker_body').after(msg);
+};
+
+View.prototype.getPandaText = function(){
+  var _case = getRandomInt(0,4);
+  var text;
+  switch(_case){
+    case 0:
+      text = '笹が食べたい。';
+      break;
+    case 1:
+      text = 'いまは「'+this.query +'」でTweetを集めてるよ。';
+      break;
+    case 2:
+      text = '御社 & 弊社';
+      break;
+    case 3:
+      text = 'ふむふむ';
+      break;
+    case 4:
+      text = '話すのは緊張するなぁ';
+      break;
+    case 5:
+      text = 'LIGさま、いいオフィスさまお貸し頂きありがなしゃす！';
+      break;
+    case 6:
+      text = 'Tweetたくさんしてちょ〜';
+      break;
+    case 7:
+      text = '今年も色々ありましたなぁ。';
+      break;
+  }
+
+  return text;
+}
+
+View.prototype.pandaAnimSeq = function(e){
+
+  switch(e.originalEvent.animationName){
+    case 'panda_arrival':
+      this.$(e.target).addClass('panda_state');
+      break;
+    case 'panda_state':
+      this.$(e.target).addClass('panda_depart')
+      break;
+    case 'panda_depart':
+      this.$(e.target).remove();
+      break;
+  }
+};
 
 module.exports = View;

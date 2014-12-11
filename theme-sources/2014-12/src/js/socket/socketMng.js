@@ -5,7 +5,7 @@ module.exports = SocketMng;
 
 function SocketMng(emitter){
   this.emitter = emitter;
-  this.socket = io('localhost:3000');
+  this.socket = io(location.hostname + ':3000');
   this.tweets = [];
 
   this.socket.on('set', this.onset.bind(this));
@@ -33,7 +33,6 @@ SocketMng.prototype.onstart = function() {
 };
 
 SocketMng.prototype.onpause = function() {
-  console.log('onpause');
   this.emitter.emit('pause');
 };
 

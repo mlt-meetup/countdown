@@ -29,5 +29,5 @@ Countdown.prototype.tick = function() {
   if (diff != this.diff) this.emit('tick', diff);
   this.diff = diff;
   if (this.diff <= 0) return this.emit('finish');
-  requestAnimationFrame(this.tick.bind(this));
+  this.raf = requestAnimationFrame(this.tick.bind(this));
 };
