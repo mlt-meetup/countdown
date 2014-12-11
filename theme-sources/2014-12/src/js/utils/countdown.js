@@ -3,22 +3,6 @@ var Emitter = require('component-emitter');
 
 module.exports = Countdown;
 
-
-// Usage:
-
-// var countdown = window.countdown = new Countdown(10);
-//
-// countdown.on('tick', function(remain) {
-//   console.log(remain);
-// });
-//
-// countdown.on('finish', function() {
-//   console.log('finish');
-// });
-//
-// countdown.start();
-
-
 function Countdown(sec) {
   this.raf;
   this.startedAt;
