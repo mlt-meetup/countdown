@@ -65,6 +65,8 @@ View.prototype.setEmitterEvents = function(){
 View.prototype.update = function(speakerName, speakerTitle){
   this.$('.lt_speaker__name').text(fullPitchString(speakerName) + "亭");
   this.$('#speaker_title').text(speakerTitle);
+
+  Ts.reload();
 };
 
 
@@ -82,6 +84,7 @@ View.prototype.reset = function(){
 
   //count down stop
   this.pause();
+
 };
 
 View.prototype.set = function(sec){
@@ -119,7 +122,7 @@ View.prototype.finish = function(){
 
 View.prototype.tick = function(until){
   var per =  (until / this.speakTime) * 52;
-  console.log(per);
+  console.log(per,until);
   this.$('#close_left').css({left:-per + '%'});
   this.$('#close_right').css({right:-per + '%'});
 };
@@ -239,6 +242,15 @@ View.prototype.getPandaText = function(){
       break;
     case 7:
       text = '今年も色々ありましたなぁ。';
+      break;
+    case 8:
+      text = 'お越しいただきありがとうございます';
+      break;
+    case 9:
+      text = '飲まなきゃやってらんねーよ！！！';
+      break;
+    case 10:
+      text = 'ありがとうございます。';
       break;
   }
 
