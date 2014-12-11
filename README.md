@@ -10,3 +10,4 @@
 - pause: (no arguments) - 残り時間のカウントダウンをポーズする
 - update: name:String, title:String - 名前とタイトルをアップデートする
 - tweet: message:Object - ツイートを表示する
+- track: query:String - ストリーミングのトラックワードを表示する
