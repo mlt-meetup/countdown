@@ -15,7 +15,7 @@ Emitter(Countdown.prototype);
 
 Countdown.prototype.start = function() {
   this.startedAt = new Date();
-  this.finishedAt = new Date(this.startedAt.valueOf() + (this.remain * 1000));
+  this.finishedAt = new Date(this.startedAt.valueOf() + (this.diff * 1000));
   this.raf = requestAnimationFrame(this.tick.bind(this));
 };
 
