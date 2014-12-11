@@ -45,7 +45,6 @@ router.post('/update', function(req, res) {
 });
 
 router.post('/track', function(req, res) {
-  console.log(req);
   var query = req.body.query;
   req.app.emit('track', query);
   res.send({ track: query });
