@@ -167,5 +167,94 @@ body,html
   54%
     transform: translate(0,0)
 
+.msg
+  padding: 20px
+  position: absolute
+  width: 200px
+  border-radius: 10px
+  background: rgba(255,255,255,0.92)
+  box-shadow: rgba(0,0,0,0.2) 0 0 20px 2px
+  fset(18,16)
+  word-break: break-all
+  background-position: center center
+  background-repeat: no-repeat
+  &:hover
+    z-index: 10000
+  &.leftside
+    &:before
+      content: ""
+      position: absolute
+      bottom: -24px
+      left: 30%
+      border: 12px solid transparent
+      border-top: 12px solid rgba(255,255,255,0.92)
+  &.rightside
+    &:before
+      content: ""
+      position: absolute
+      bottom: -24px
+      right: 30%
+      border: 12px solid transparent
+      border-top: 12px solid rgba(255,255,255,0.92)
+  p
+    display: inline-block
+    z-index: 2
+    margin: 0
+  .image
+    position: absolute
+    width: 48px
+    height: 48px
+    border-radius 50%
+    overflow: hidden
+    opacity: 0.4
+    top: 50%;
+    left: 50%;
+    margin-left: -24px;
+    margin-top: -24px;
+    z-index: 0
+    img
+      width: 48px
+      height: 48px
 
+.arrival
+  -webkit-animation: arrival .3s linear;
+
+.state
+  -webkit-animation: state 6s linear; 
+
+.depart
+  -webkit-animation: depart .3s linear; 
+      
+
+@keyframes depart
+  0% 
+    opacity: 1;
+    transform: translate(0,-10px);
+
+  100%
+    opacity: 0;
+    transform: translate(0,-100px);
+  
+
+
+@keyframes state
+  0% 
+    opacity: 1;
+    transform: translate(0,0px);
+  
+  100%
+    opacity: 1;
+    transform: translate(0,-10px);
+  
+
+
+@keyframes arrival
+  0% 
+    opacity: 0;
+    -webkit-transform: translate(0,100px);
+  
+  100%
+    opacity: 1;
+    -webkit-transform: translate(0,0);
+  
 
