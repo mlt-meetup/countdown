@@ -12,7 +12,7 @@ function View(emitter){
 
 
   //this query
-  this.query = "";
+  this.query = "#mlt2014";
 
   //sec
   this.speakTime = 10;
@@ -74,6 +74,9 @@ View.prototype.reset = function(){
   console.log('reset function');
   this.update('提供 いいオフィスさん', '月刊LT12月号の巻');
   
+  this.$('.lt_speaker__name').text('提供 いいオフィスさん ＠ＬＩＧ');
+  this.$('#speaker_title').text('月刊LT12月号の巻');
+
   //syuryo
   this.$('.syuryo').addClass('hidden');
 
@@ -81,6 +84,8 @@ View.prototype.reset = function(){
   var basePos = 52;
   this.$('#close_left').css({left: -basePos+'%'});
   this.$('#close_right').css({right: -basePos+'%'});
+
+  this.$('#until').text('');
 
   //count down stop
   this.pause();
@@ -95,7 +100,7 @@ View.prototype.set = function(sec){
 View.prototype.start = function(){
   console.log('start!!!',this.speakTime);
   // first position = 52%
-  var basePos = 52;
+  var basePos = 100;
   this.$('#close_left').css({left: -basePos+'%'});
   this.$('#close_right').css({right: -basePos+'%'});
 
@@ -118,6 +123,7 @@ View.prototype.start = function(){
 View.prototype.finish = function(){
   this.countdown.pause();
   this.$('.syuryo').removeClass('hidden');
+  this.$('#until').text('');
 }
 
 View.prototype.tick = function(until){
@@ -125,6 +131,7 @@ View.prototype.tick = function(until){
   console.log(per,until);
   this.$('#close_left').css({left:-per + '%'});
   this.$('#close_right').css({right:-per + '%'});
+  this.$('#until').text(until + '秒');
 };
 
 View.prototype.tweet = function(tweet){
@@ -216,7 +223,7 @@ View.prototype.addPandaComment = function(e){
 };
 
 View.prototype.getPandaText = function(){
-  var _case = getRandomInt(0,4);
+  var _case = getRandomInt(0,12);
   var text;
   switch(_case){
     case 0:
@@ -251,6 +258,12 @@ View.prototype.getPandaText = function(){
       break;
     case 10:
       text = 'ありがとうございます。';
+      break;
+    case 11:
+      text = '#mlt2014でつぶやいてださい';
+      break;
+    case 12:
+      text = '#mlt2014でつぶやきしようよ！';
       break;
   }
 
